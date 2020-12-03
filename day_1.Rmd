@@ -1,0 +1,45 @@
+---
+output: github_document
+title: Advent of Code - Day 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Packages
+
+```{r}
+# devtools::install_github("benjaminguinaudeau/adventr")
+library(dplyr)
+library(adventr)
+
+```
+
+## Problem data
+
+```{r}
+input <- read_advent_of_code(1) %>%
+  as.numeric() %>%
+  glimpse
+```
+
+## 1. Task 
+
+```{r}
+prod(input[input %in% (2020 - input)])
+```
+
+## 2. Task
+
+```{r}
+input %>%
+  purrr::map(~{
+    input[input %in% (2020 - .x - input)]
+  }) %>%
+  purrr::reduce(c) %>%
+  unique  %>%
+  prod
+```
+

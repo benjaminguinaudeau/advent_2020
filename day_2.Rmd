@@ -1,0 +1,82 @@
+---
+output: github_document
+title: Advent of Code - Day 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Packages
+
+```{r}
+# devtools::install_github("benjaminguinaudeau/adventr")
+suppressMessages(library(dplyr))
+library(stringr)
+library(purrr)
+library(adventr)
+```
+
+## Problem data
+
+```{r}
+input <- read_advent_of_code(2) %>%
+  glimpse
+```
+
+## Data Wranling
+
+```{r}
+data <- input %>%
+  unglue::unglue_data("{min}-{max} {letter}: {password}") %>%
+  mutate_at(vars(min, max), as.numeric) %>%
+  glimpse
+```
+
+## Task 1
+
+```{r}
+data %>%
+  mutate(real = str_count(password, letter), 
+         valid = real >= min & real <= max) %>%
+  count(valid)
+```
+
+## Task 2
+
+```{r}
+data %>% 
+  mutate(letter_1 = str_sub(password, min, min), 
+         letter_2 = str_sub(password, max, max),
+         valid = (letter_1 == letter) + (letter_2 == letter) == 1) %>%
+  count(valid)
+```
+
+## Benchmark between unglue and stringr
+
+```{r}
+unglue_way <- function(){
+  unglue::unglue_data(input, "{min}-{max} {letter}: {password}") %>%
+    as_tibble() %>%
+    mutate_at(vars(min, max), as.numeric)
+}
+
+stringr_way <- function(){
+  input %>%
+    str_extract_all("(?=\\b)\\w+") %>% #bashR::simule_map(1)
+    map_dfr(~{
+      tibble::tibble(min = .x[1], max = .x[2], letter = .x[3], password = .x[4])
+    }) %>%
+    mutate_at(vars(min, max), as.numeric)
+}
+```
+
+
+```{r}
+identical(unglue_way(), stringr_way())
+```
+
+
+```{r}
+microbenchmark::microbenchmark(unglue_way, stringr_way, times = 1000)
+```
