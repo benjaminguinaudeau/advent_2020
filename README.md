@@ -12,6 +12,18 @@ This repo gathers my solutions to the [Advent of code
     2](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_2.md)
 -   [Day
     3](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_3.md)
+-   [Day
+    4](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_4.md)
+-   [Day
+    5](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_5.md)
+-   [Day
+    6](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_6.md)
+-   [Day
+    7](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_7.md)
+-   [Day
+    8](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_8.md)
+-   [Day
+    9](https://github.com/benjaminguinaudeau/advent_2020/blob/master/day_9.md)
 
 If you tired of exporting the problem data as .csv,
 {[adventr](https://github.com/benjaminguinaudeau/adventr)} is small
